@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require_relative '../scraper.rb'
 
 describe scraper do
-    it 'grabs data from a website' do
-        expect {"Added #{job[:title]}"}.to eql(text)
-    end
-
+  it 'grabs data from a website' do
+    expect { "Added #{job[:title]}" }.to eql(text)
+  end
 end

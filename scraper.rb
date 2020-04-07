@@ -4,7 +4,6 @@ require 'nokogiri'
 require 'httparty'
 require 'byebug'
 
-
 def scraper
   url = 'https://www.indeed.com/q-Indeed-jobs.html'
   unparsed_page = HTTParty.get(url)
