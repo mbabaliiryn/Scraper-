@@ -1,45 +1,43 @@
-# frozen_string_literal: true
-
-require 'nokogiri'
 require 'httparty'
-require 'byebug'
+require 'nokogiri'
 
-def scraper
-  url = 'https://www.indeed.com/q-Indeed-jobs.html'
-  unparsed_page = HTTParty.get(url)
-  parsed_page = Nokogiri::HTML(unparsed_page)
-  jobs = []
-  job_listings = parsed_page.css('div.listingCard') # 50 jobs
+class Scraper
+attr_accessor :parse_page
 
-  page = 1
-  per_page = job_listings.count # 50
-  total = parsed_page.css('div.job-count').text
-  last_page = per_page.to_i.round # 46
+  def initialize
+    url = "https://nike.com"
+    doc = HTTParty.get(url).body
+    @parse_page ||= Nokogiri::HTML(doc)
+  
 
-  while page <= last_page
-    pagination_url = "https://www.indeed.com/q-Indeed-jobs.html/listings?page=#{page}"
-    puts pagination_url
-    puts "page: #{page}"
-    puts ''
-    pagination_unparsed_page = HTTParty.get(pagination_url)
-    pagination_parsed_page = Nokogiri::HTML(pagination_unparsed_page)
-    pagination_job_listings = parsed_page.css('div.listingCard')
-    pagination_job_listings.each do |job_listing|
-      job = {
-        title: job_listing.css('span.job-title').text,
-        company: job_listing.css('span.company').text,
-        location: job_listing.css('span.location').text,
-        url: 'https://www.indeed.com/q-Indeed-jobs.html' + job_listing.css('a')[0].attributes['href'].value
-
-      }
-      jobs << job
-      puts "Added #{job[:title]}"
-      puts ''
     end
-    page += 1
 
-  end
-  byebug
+    def get_names
+        item_container.css(".product_name").css("p").children.map { |name| name.text }.compact
+    end
+
+    def get_prices
+        item_container.css(".product_price").css("span.local").children.map { |price| price.text }.compact
+    end
+
+
+    private
+
+    def item_container
+        parse_page.css(".grid-item-info")
+        
+    end
+
 end
 
-scraper
+scraper = Scraper.new
+names = scraper.get_names
+prices = scraper.get_names
+
+(0...prices.size).each do |index|
+puts "--- index: #{index + 1}---"
+puts "Name: #{names[index]} | price: #{prices[index]}"
+end
+
+
+
