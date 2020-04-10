@@ -1,27 +1,27 @@
-require 'httparty'
-require 'nokogiri'
+require "httparty"
+require "nokogiri"
 
 class Scraper
   attr_accessor :parse_page
 
   def initialize
-    url = 'https://www.nike.com/w/new-3n82y'
+    url = "https://www.nike.com/w/new-3n82y"
     doc = HTTParty.get(url).body
     @parse_page ||= Nokogiri::HTML(doc)
   end
 
   def names
-    item_container.css('.product_name').css('p').children.map(&:text).compact
+    item_container.css(".product_name").css("p").children.map(&:text).compact
   end
 
   def prices
-    item_container.css('.product_price').css('span.local').children.map(&:text).compact
+    item_container.css(".product_price").css("span.local").children.map(&:text).compact
   end
 
   private
 
   def item_container
-    parse_page.css('.grid-item-info')
+    parse_page.css(".grid-item-info")
   end
 
   scraper = Scraper.new
