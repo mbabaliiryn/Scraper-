@@ -48,3 +48,6 @@ Lint/RaiseException:
   Enabled: true
 Lint/StructNewOverride:
   Enabled: true
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
