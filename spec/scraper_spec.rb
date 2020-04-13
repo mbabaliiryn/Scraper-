@@ -1,8 +1,8 @@
 require "rspec"
- require_relative "../lib/scraper"
+require_relative "../lib/scraper"
 describe Scraper do
   let(:scraper) { Scraper.new }
-  
+
   describe "#prices" do
     it "should be an instance of Array" do
       expect(scraper.prices).to be_instance_of Array
