@@ -1,14 +1,14 @@
-require_relative "../scraper.rb"
+require "rspec"
+ require_relative "../lib/scraper"
 describe Scraper do
-  describe "names" do
-    it "prints out an empty string" do
-      expect(p(names)).to eq([])
+  let(:scraper) { Scraper.new }
+  
+  describe "#prices" do
+    it "should be an instance of Array" do
+      expect(scraper.prices).to be_instance_of Array
     end
-  end
-
-  describe "prices" do
-    it "prints out an empty string" do
-      expect(p(prices)).to eql([])
+    it "should be a non empty array" do
+      expect(scraper.prices).not_to be_empty
     end
   end
 end
