@@ -1,6 +1,7 @@
 require "rspec"
  require_relative "../lib/scraper"
 describe Scraper do
+  
   let(:scraper) { Scraper.new }
   
   describe "#prices" do

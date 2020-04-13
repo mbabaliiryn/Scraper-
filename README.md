@@ -11,7 +11,6 @@ Scraper is a tool for scraping and visualizing open source data from various cod
 
 - The code has been tested using the following test cases:
 
-* `byebug`
 * `rubocop`
 * `rspec`
 
