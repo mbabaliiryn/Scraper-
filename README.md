@@ -15,7 +15,7 @@ Scraper is a tool for scraping and visualizing open source data from various cod
 * `rspec`
 
 ## how to get started
-- Run ruby scraper.rb
+- Run ruby bin/main.rb
 
 ## Author
 
